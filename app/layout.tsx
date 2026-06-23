@@ -10,6 +10,7 @@ import "@fontsource/jetbrains-mono/700.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://anywecon.vercel.app"),
   title: "Any WeCon - Freelance Developer",
   description:
     "Custom web, mobile & desktop apps for businesses. Offline-first, licensed, delivered.",
@@ -17,6 +18,11 @@ export const metadata: Metadata = {
     title: "Any WeCon - Freelance Developer",
     description: "Custom web, mobile & desktop apps. Offline-first, licensed, delivered.",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Any WeCon - Freelance Developer",
+    description: "Custom web, mobile & desktop apps. Offline-first, licensed, delivered.",
   },
 };
 
