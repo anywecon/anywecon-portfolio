@@ -199,7 +199,7 @@ export default function InteractiveBackdrop() {
       <div
         ref={cursorRef}
         aria-hidden
-        className="custom-cursor pointer-events-none fixed left-0 top-0 z-[60] opacity-0"
+        className="custom-cursor pointer-events-none fixed left-0 top-0 z-[100] opacity-0"
         style={{ transform: "translate3d(-100px,-100px,0)" }}
       >
         <span className="block h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full border border-lime bg-lime/20 backdrop-blur-[1px] transition-transform" />
