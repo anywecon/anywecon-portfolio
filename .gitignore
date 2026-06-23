@@ -1,0 +1,14 @@
+node_modules
+.next
+out
+.env*.local
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+
+# local dev logs / temp
+dev-out.log
+dev-err.log
+dev.log
+_pick.html
+vc-*.txt

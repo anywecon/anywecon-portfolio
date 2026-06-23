@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+::selection {
+  background: #c8ff00;
+  color: #0a0a0b;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* hide native cursor on devices with a precise pointer (custom cursor takes over) */
+@media (pointer: fine) {
+  html,
+  a,
+  button {
+    cursor: none;
+  }
+}
+/* on touch / coarse pointers, keep native cursor and never show custom one */
+@media (pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .custom-cursor {
+    display: none !important;
+  }
+  html,
+  a,
+  button {
+    cursor: auto;
+  }
+}
+
+/* focus visibility - accessibility floor */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #c8ff00;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* custom cursor: grows + fills when hovering an interactive (calm) zone */
+.custom-cursor > span {
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.18s ease;
+}
+.custom-cursor[data-calm] > span {
+  transform: translate(-50%, -50%) scale(1.9);
+  background-color: rgba(200, 255, 0, 0.08);
+}
+
+/* tilt zones: spec fields + screenshots */
+.tilt-zone {
+  position: relative;
+  transform: perspective(700px) rotateX(0) rotateY(0) scale(1);
+  transform-style: preserve-3d;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+/* lime edge glow that tracks the cursor near the borders */
+.tilt-zone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  opacity: var(--glow, 0);
+  transition: opacity 0.2s ease;
+  background: radial-gradient(
+    90px circle at var(--gx, 50%) var(--gy, 50%),
+    rgba(200, 255, 0, 0.9),
+    rgba(200, 255, 0, 0) 70%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tilt-zone {
+    transform: none !important;
+    transition: none;
+  }
+  .tilt-zone::after {
+    display: none;
+  }
+}
+
+/* soft frosted backdrop directly behind text — mutes grid dots & cursor light
+   so reading is calm, without hiding the ambient glow entirely */
+.frost {
+  position: relative;
+  isolation: isolate;
+}
+.frost::before {
+  content: "";
+  position: absolute;
+  inset: -4px -10px;
+  z-index: -1;
+  border-radius: 10px;
+  background: rgba(10, 10, 11, 0.55);
+  backdrop-filter: blur(7px) saturate(0.9);
+  -webkit-backdrop-filter: blur(7px) saturate(0.9);
+  /* fade edges so the panel blends into the page instead of a hard box */
+  -webkit-mask: linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0);
+}
