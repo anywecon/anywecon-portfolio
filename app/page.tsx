@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Locale } from "@/lib/projects";
 import { dict } from "@/lib/i18n";
 import { projects } from "@/lib/projects";
@@ -11,8 +11,12 @@ import Contact from "@/components/Contact";
 import InteractiveBackdrop from "@/components/InteractiveBackdrop";
 
 export default function Home() {
-  const [locale, setLocale] = useState<Locale>("el");
+  const [locale, setLocale] = useState<Locale>("en");
   const t = dict[locale];
+
+  useEffect(() => {
+    document.documentElement.lang = locale;
+  }, [locale]);
 
   return (
     <main className="relative min-h-screen">
