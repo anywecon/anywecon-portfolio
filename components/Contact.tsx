@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import type { Dict } from "@/lib/i18n";
 
-const EMAIL = "fiouri.work@gmail.com";
+const EMAIL = "giorgos.n.pap@gmail.com";
 
 export default function Contact({ t }: { t: Dict }) {
   return (
