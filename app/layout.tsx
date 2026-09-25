@@ -32,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="el">
+    <html lang="en">
       <body className="bg-ink text-fog font-body antialiased">{children}</body>
     </html>
   );
