@@ -2,7 +2,7 @@ import type { Locale } from "./projects";
 
 export const dict = {
   el: {
-    nav: { work: "Έργα", contact: "Επικοινωνία" },
+    nav: { work: "Έργα", oss: "Open source", contact: "Επικοινωνία" },
     hero: {
       role: "Freelance Developer · Πάτρα",
       line1: "Από την ιδέα στο",
@@ -20,6 +20,16 @@ export const dict = {
       live: "Live demo",
       spec: "Specs",
     },
+    oss: {
+      eyebrow: "Open source",
+      title: "Ανοιχτός κώδικας",
+      sub: "Δωρεάν εργαλεία που φτιάχνω και συντηρώ δημόσια. Offline-first, χωρίς λογαριασμούς και tracking.",
+      source: "Κώδικας",
+      site: "Ιστοσελίδα",
+      updated: "Ενημέρωση",
+      stars: "αστέρια",
+      months: ["Ιαν", "Φεβ", "Μαρ", "Απρ", "Μάι", "Ιουν", "Ιουλ", "Αυγ", "Σεπ", "Οκτ", "Νοε", "Δεκ"],
+    },
     contact: {
       eyebrow: "Επικοινωνία",
       title: "Έχεις ένα project;",
@@ -29,7 +39,7 @@ export const dict = {
     footer: "Φτιαγμένο με Next.js.",
   },
   en: {
-    nav: { work: "Work", contact: "Contact" },
+    nav: { work: "Work", oss: "Open source", contact: "Contact" },
     hero: {
       role: "Freelance Developer · Patras, GR",
       line1: "From idea to",
@@ -46,6 +56,16 @@ export const dict = {
       stack: "Stack",
       live: "Live demo",
       spec: "Specs",
+    },
+    oss: {
+      eyebrow: "Open source",
+      title: "Built in the open",
+      sub: "Free tools I build and maintain publicly. Offline-first, no accounts, no tracking.",
+      source: "Source",
+      site: "Website",
+      updated: "Updated",
+      stars: "stars",
+      months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     },
     contact: {
       eyebrow: "Contact",

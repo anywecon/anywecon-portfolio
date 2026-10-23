@@ -27,6 +27,12 @@ export default function Header({
             {t.nav.work}
           </a>
           <a
+            href="#oss"
+            className="hidden font-mono text-xs uppercase tracking-widest text-steel transition-colors hover:text-fog sm:inline"
+          >
+            {t.nav.oss}
+          </a>
+          <a
             href="#contact"
             className="hidden font-mono text-xs uppercase tracking-widest text-steel transition-colors hover:text-fog sm:inline"
           >

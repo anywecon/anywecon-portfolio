@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import type { Dict } from "@/lib/i18n";
+import { ProfileLinks } from "@/components/OpenSource";
 
 const EMAIL = "anywecon@gmail.com";
 
@@ -30,6 +31,8 @@ export default function Contact({ t }: { t: Dict }) {
           {EMAIL}
           <span className="transition-transform group-hover:translate-x-1">→</span>
         </a>
+
+        <ProfileLinks className="mt-8" />
       </motion.div>
     </section>
   );
