@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import type { Locale } from "@/lib/projects";
 import type { Dict } from "@/lib/i18n";
+import TiltZone from "@/components/TiltZone";
 import {
   ossRepos,
   profiles,
@@ -36,76 +37,79 @@ function RepoCard({
   const hostLabel = repo.host === "github" ? "GitHub" : "GitLab";
 
   return (
+    // motion wrapper owns the entrance transform; TiltZone owns the hover transform
     <motion.article
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-      className="group flex flex-col rounded-lg border border-line bg-surface/80 p-6 backdrop-blur-sm transition-colors hover:border-lime/60"
+      className="h-full"
     >
-      <div className="flex items-center justify-between gap-3">
-        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-steel">
-          {hostLabel} · {repo.owner}/{repo.repo}
-        </span>
-        {stats && stats.stars > 0 && (
-          <span className="font-mono text-xs text-lime" aria-label={`${stats.stars} ${t.oss.stars}`}>
-            ★ {stats.stars}
+      <TiltZone className="flex h-full flex-col rounded-lg border border-line bg-surface p-6">
+        <div className="flex items-center justify-between gap-3">
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-steel">
+            {hostLabel} · {repo.owner}/{repo.repo}
           </span>
-        )}
-      </div>
-
-      <h3 className="mt-4 font-display text-2xl font-bold tracking-tight">{repo.name}</h3>
-      <p className="frost mt-3 flex-1 text-sm leading-relaxed text-fog/70">
-        {repo.tagline[locale]}
-      </p>
-
-      <div className="mt-5 flex flex-wrap gap-2">
-        {repo.topics.map((topic) => (
-          <span
-            key={topic}
-            className="rounded border border-line bg-ink px-2 py-0.5 font-mono text-[10px] text-fog/60"
-          >
-            {topic}
-          </span>
-        ))}
-      </div>
-
-      <dl className="mt-5 grid grid-cols-2 gap-px overflow-hidden rounded border border-line bg-line">
-        <div className="bg-surface px-3 py-2">
-          <dt className="font-mono text-[9px] uppercase tracking-wider text-steel">Stack</dt>
-          <dd className="mt-0.5 font-mono text-[11px] font-bold text-lime">{repo.language}</dd>
+          {stats && stats.stars > 0 && (
+            <span className="font-mono text-xs text-lime" aria-label={`${stats.stars} ${t.oss.stars}`}>
+              ★ {stats.stars}
+            </span>
+          )}
         </div>
-        <div className="bg-surface px-3 py-2">
-          <dt className="font-mono text-[9px] uppercase tracking-wider text-steel">License</dt>
-          <dd className="mt-0.5 font-mono text-[11px] font-bold text-lime">{repo.license}</dd>
-        </div>
-      </dl>
 
-      <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
-        <a
-          href={repoUrl(repo)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-mono text-sm font-bold text-lime hover:underline"
-        >
-          {t.oss.source} ↗
-        </a>
-        {repo.homepage && (
+        <h3 className="mt-4 font-display text-2xl font-bold tracking-tight">{repo.name}</h3>
+        <p className="mt-3 flex-1 text-sm leading-relaxed text-fog/70">
+          {repo.tagline[locale]}
+        </p>
+
+        <div className="mt-5 flex flex-wrap gap-2">
+          {repo.topics.map((topic) => (
+            <span
+              key={topic}
+              className="rounded border border-line bg-ink px-2 py-0.5 font-mono text-[10px] text-fog/60"
+            >
+              {topic}
+            </span>
+          ))}
+        </div>
+
+        <dl className="mt-5 grid grid-cols-2 gap-px overflow-hidden rounded border border-line bg-line">
+          <div className="bg-surface px-3 py-2">
+            <dt className="font-mono text-[9px] uppercase tracking-wider text-steel">Stack</dt>
+            <dd className="mt-0.5 font-mono text-[11px] font-bold text-lime">{repo.language}</dd>
+          </div>
+          <div className="bg-surface px-3 py-2">
+            <dt className="font-mono text-[9px] uppercase tracking-wider text-steel">License</dt>
+            <dd className="mt-0.5 font-mono text-[11px] font-bold text-lime">{repo.license}</dd>
+          </div>
+        </dl>
+
+        <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
           <a
-            href={repo.homepage}
+            href={repoUrl(repo)}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-mono text-sm font-bold text-fog/80 hover:text-lime hover:underline"
+            className="font-mono text-sm font-bold text-lime hover:underline"
           >
-            {t.oss.site} ↗
+            {t.oss.source} ↗
           </a>
-        )}
-        {stats?.pushedAt && (
-          <span className="ml-auto font-mono text-[11px] text-steel">
-            {t.oss.updated} {formatMonth(stats.pushedAt, t.oss.months)}
-          </span>
-        )}
-      </div>
+          {repo.homepage && (
+            <a
+              href={repo.homepage}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-sm font-bold text-fog/80 hover:text-lime hover:underline"
+            >
+              {t.oss.site} ↗
+            </a>
+          )}
+          {stats?.pushedAt && (
+            <span className="ml-auto font-mono text-[11px] text-steel">
+              {t.oss.updated} {formatMonth(stats.pushedAt, t.oss.months)}
+            </span>
+          )}
+        </div>
+      </TiltZone>
     </motion.article>
   );
 }
@@ -150,7 +154,7 @@ export default function OpenSource({
             <h2 className="font-display text-4xl font-bold tracking-tight md:text-6xl">
               {t.oss.title}
             </h2>
-            <p className="frost mt-5 max-w-xl font-body text-base text-steel">{t.oss.sub}</p>
+            <p className="mt-5 max-w-xl font-body text-base text-steel">{t.oss.sub}</p>
           </div>
           <ProfileLinks />
         </div>
