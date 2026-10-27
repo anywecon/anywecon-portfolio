@@ -54,7 +54,7 @@ GitLab @anywecon: μόνο profile link (κανένα public project ακόμα)
 - Git auth σε non-interactive shell: `git -c credential.helper= -c "credential.helper=!gh auth git-credential" push origin main` (ή μία φορά `gh auth setup-git`). Ο GCM ζητάει διάλογο και αποτυγχάνει σιωπηλά.
 - Verify live μετά το push: το Vercel θέλει ~30s, μετά grep στο https://anywecon.dev.
 - Dev server: `Start-Process cmd '/c npm run dev'` detached, check http://localhost:3000.
-- Νέο project: πρόσθεσε entry στο lib/projects.ts + screenshots σε public/shots/<slug>/ + shots count.
+- Νέο project: πρόσθεσε entry στο lib/projects.ts + screenshots σε public/shots/<slug>/ + shots count. `storeUrl` για link Google Play, `shotAspect` (π.χ. "9 / 16") αν τα screenshots δεν είναι 9:19.5.
 - Code/commits: αγγλικά. Συνομιλία: ελληνικά, συνοπτικά, λύση πρώτα.
 
 ## Επαφή στο site

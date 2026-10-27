@@ -20,6 +20,8 @@ export interface Project {
   stack: string[];
   specs: ProjectSpec[];
   liveUrl?: string;
+  // public store listing (e.g. Google Play)
+  storeUrl?: string;
 }
 
 export const projects: Project[] = [
@@ -38,20 +40,21 @@ export const projects: Project[] = [
       en: "Workers and small businesses struggle to track shifts, overtime and pay under Greek labour rules.",
     },
     solution: {
-      el: "Offline-first mobile app με τοπική βάση SQLite, υπολογισμό αμοιβών, δίγλωσσο UI και προαιρετικό cloud sync. 14 οθόνες, πλήρες test coverage.",
-      en: "Offline-first mobile app with local SQLite, pay calculation, bilingual UI and optional cloud sync. 14 screens, full test coverage.",
+      el: "Offline-first mobile app με τοπική βάση SQLite, υπολογισμό αμοιβών βάσει εργατικής νομοθεσίας, δίγλωσσο UI και τοπικό backup (export/import). Χωρίς λογαριασμό, χωρίς server.",
+      en: "Offline-first mobile app with local SQLite, labour-law pay calculation, bilingual UI and local backup (export/import). No account, no server.",
     },
     role: {
       el: "Πλήρης σχεδιασμός, ανάπτυξη, testing και δημοσίευση στο Google Play.",
       en: "End-to-end design, development, testing and Google Play release.",
     },
-    stack: ["Expo SDK 54", "React Native 0.81", "TypeScript", "Zustand", "SQLite", "Supabase", "i18next"],
+    stack: ["Expo SDK 54", "React Native 0.81", "TypeScript", "Zustand", "SQLite", "i18next"],
     specs: [
       { label: { el: "Πλατφόρμα", en: "Platform" }, value: "Android" },
       { label: { el: "Build", en: "Build" }, value: "Local Gradle AAB" },
-      { label: { el: "Tests", en: "Tests" }, value: "106 passing" },
-      { label: { el: "Κατάσταση", en: "Status" }, value: "Play testing" },
+      { label: { el: "Tests", en: "Tests" }, value: "888 passing" },
+      { label: { el: "Κατάσταση", en: "Status" }, value: "Live · v2.3.0" },
     ],
+    storeUrl: "https://play.google.com/store/apps/details?id=com.anywecon.myshiftapp",
   },
   {
     slug: "parousio",

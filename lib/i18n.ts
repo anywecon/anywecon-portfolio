@@ -18,6 +18,7 @@ export const dict = {
       role: "Ο ρόλος μου",
       stack: "Stack",
       live: "Live demo",
+      store: "Google Play",
       spec: "Specs",
     },
     oss: {
@@ -55,6 +56,7 @@ export const dict = {
       role: "My role",
       stack: "Stack",
       live: "Live demo",
+      store: "Google Play",
       spec: "Specs",
     },
     oss: {

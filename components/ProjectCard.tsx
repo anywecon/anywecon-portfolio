@@ -81,15 +81,29 @@ export default function ProjectCard({
           ))}
         </div>
 
-        {project.liveUrl && (
-          <a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-7 inline-flex items-center gap-2 font-mono text-sm font-bold text-lime hover:underline"
-          >
-            {t.project.live} ↗
-          </a>
+        {(project.liveUrl || project.storeUrl) && (
+          <div className="mt-7 flex flex-wrap gap-x-6 gap-y-2">
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-mono text-sm font-bold text-lime hover:underline"
+              >
+                {t.project.live} ↗
+              </a>
+            )}
+            {project.storeUrl && (
+              <a
+                href={project.storeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-mono text-sm font-bold text-lime hover:underline"
+              >
+                {t.project.store} ↗
+              </a>
+            )}
+          </div>
         )}
       </div>
 
