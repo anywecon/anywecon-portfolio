@@ -11,11 +11,17 @@ export default function ShotCarousel({
   slug,
   name,
   total,
+  aspect,
 }: {
   slug: string;
   name: string;
   total: number;
+  /** Native screenshot ratio, e.g. "9 / 16". Defaults to the 9:19.5 phone ratio. */
+  aspect?: string;
 }) {
+  // Without an explicit ratio the thumbnails keep their slightly tighter 9:19 crop.
+  const thumbAspect = aspect ?? "9 / 19";
+  const fullAspect = aspect ?? "9 / 19.5";
   const reduce = useReducedMotion();
   const [offset, setOffset] = useState(0); // index of leftmost visible shot (0-based)
   const [lightbox, setLightbox] = useState<number | null>(null); // 1-based file number
@@ -81,7 +87,10 @@ export default function ShotCarousel({
               transition={{ duration: 0.62, ease: [0.16, 1, 0.3, 1] }}
               style={{ willChange: "transform, opacity, filter" }}
             >
-              <TiltZone className="group relative aspect-[9/19] cursor-none overflow-hidden rounded-xl border border-line bg-surface">
+              <TiltZone
+                className="group relative cursor-none overflow-hidden rounded-xl border border-line bg-surface"
+                style={{ aspectRatio: thumbAspect }}
+              >
                 <button
                   onClick={() => setLightbox(n)}
                   aria-label={`Open ${name} screenshot ${n}`}
@@ -161,7 +170,7 @@ export default function ShotCarousel({
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               onClick={(e) => e.stopPropagation()}
               className="relative h-[80vh] w-auto overflow-hidden rounded-2xl border border-line shadow-2xl"
-              style={{ aspectRatio: "9 / 19.5" }}
+              style={{ aspectRatio: fullAspect }}
             >
               <Image
                 src={src(lightbox)}

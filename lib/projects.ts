@@ -11,6 +11,8 @@ export interface Project {
   year: string;
   // number of screenshots expected in /public/shots/<slug>/01.png ...
   shots: number;
+  // native screenshot ratio when it differs from the default 9:19.5 phone ratio
+  shotAspect?: string;
   tagline: { el: string; en: string };
   problem: { el: string; en: string };
   solution: { el: string; en: string };
@@ -26,6 +28,7 @@ export const projects: Project[] = [
     name: "MyShift",
     year: "2026",
     shots: 8,
+    shotAspect: "9 / 16",
     tagline: {
       el: "Διαχείριση βαρδιών & μισθοδοσίας για την ελληνική αγορά.",
       en: "Shift & payroll management built for the Greek market.",

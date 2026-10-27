@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
+import { useRef, type CSSProperties, type ReactNode } from "react";
 
 const MAX_TILT = 9; // degrees
 const GLOW_RADIUS = 90; // px from edge where the lime border appears
@@ -14,9 +14,12 @@ const GLOW_RADIUS = 90; // px from edge where the lime border appears
 export default function TiltZone({
   children,
   className = "",
+  style,
 }: {
   children: ReactNode;
   className?: string;
+  /** Static layout styles only (e.g. aspectRatio); transform is owned by the tilt logic. */
+  style?: CSSProperties;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -61,6 +64,7 @@ export default function TiltZone({
       onPointerMove={onMove}
       onPointerLeave={onLeave}
       className={`tilt-zone ${className}`}
+      style={style}
     >
       {children}
     </div>

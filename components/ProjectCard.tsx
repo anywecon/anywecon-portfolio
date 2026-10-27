@@ -108,7 +108,12 @@ export default function ProjectCard({
         </TiltZone>
 
         {/* screenshot carousel */}
-        <ShotCarousel slug={project.slug} name={project.name} total={project.shots} />
+        <ShotCarousel
+          slug={project.slug}
+          name={project.name}
+          total={project.shots}
+          aspect={project.shotAspect}
+        />
       </div>
     </motion.article>
   );
