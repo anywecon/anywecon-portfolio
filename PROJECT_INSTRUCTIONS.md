@@ -2,11 +2,11 @@
 
 ## Τι είναι
 Production portfolio site του brand "Any WeCon" (solo freelance dev, Πάτρα).
-Live: https://anywecon.dev (+ www → apex redirect). Repo: github.com/Fiouri/anywecon-portfolio (private).
+Live: https://anywecon.dev (+ www → apex redirect). Repo: github.com/anywecon/anywecon-portfolio (private, org Any WeCon· Vercel GitHub App εγκατεστημένη στο org μόνο για αυτό το repo).
 Local path: F:\Projects\Portofolio\anywecon-portfolio
 
 ## Stack
-- Next.js 14 (App Router) + TypeScript strict
+- Next.js 15.5 (App Router) + React 19 + TypeScript strict. `overrides` στο package.json (postcss της next, brace-expansion 1.x) για security fixes. `next lint` είναι deprecated (φεύγει στη Next 16 → μετάβαση σε ESLint CLI)
 - Tailwind (custom theme: ink #0A0A0B, surface #121214, line #26262A, fog #EDEDED, steel #6B7280, lime #C8FF00)
 - Motion (framer-motion `motion/react`) για animations
 - Self-hosted fonts via @fontsource (Space Grotesk display, Inter body, JetBrains Mono mono) — ΟΧΙ next/font/google (proxy issue)
@@ -43,7 +43,7 @@ Local path: F:\Projects\Portofolio\anywecon-portfolio
 myshift (8 shots) · parousio (4) · kratiseis (13) · pame-parea (7, Beta, live link)
 
 ## Open source (lib/oss.ts)
-GitHub @Fiouri: selis · skepi · privacy-suite (το myshift repo είναι μόνο privacy pages, δεν εμφανίζεται).
+GitHub org @anywecon: selis · skepi · privacy-suite (το myshift repo είναι μόνο privacy pages, δεν εμφανίζεται).
 GitLab @anywecon: μόνο profile link (κανένα public project ακόμα).
 Νέο public repo: πρόσθεσε entry στο ossRepos (host, owner, repo, copy EL/EN, language, license, topics, homepage).
 

@@ -40,7 +40,7 @@ export const repoUrl = (r: Pick<OssRepo, "host" | "owner" | "repo">): string =>
     : `https://gitlab.com/${r.owner}/${r.repo}`;
 
 export const profiles: CodeProfile[] = [
-  { host: "github", label: "GitHub", handle: "Fiouri", url: "https://github.com/Fiouri" },
+  { host: "github", label: "GitHub", handle: "anywecon", url: "https://github.com/anywecon" },
   { host: "gitlab", label: "GitLab", handle: "anywecon", url: "https://gitlab.com/anywecon" },
 ];
 
@@ -51,7 +51,7 @@ export const profiles: CodeProfile[] = [
 export const ossRepos: OssRepo[] = [
   {
     host: "github",
-    owner: "Fiouri",
+    owner: "anywecon",
     repo: "selis",
     name: "Selis",
     tagline: {
@@ -61,11 +61,11 @@ export const ossRepos: OssRepo[] = [
     language: "TypeScript · Rust",
     license: "Apache-2.0",
     topics: ["Tauri", "React", "P2P", "OCR"],
-    homepage: "https://fiouri.github.io/selis/",
+    homepage: "https://anywecon.github.io/selis/",
   },
   {
     host: "github",
-    owner: "Fiouri",
+    owner: "anywecon",
     repo: "skepi",
     name: "S.K.E.P.I.",
     tagline: {
@@ -78,7 +78,7 @@ export const ossRepos: OssRepo[] = [
   },
   {
     host: "github",
-    owner: "Fiouri",
+    owner: "anywecon",
     repo: "privacy-suite",
     name: "Privacy Suite",
     tagline: {
