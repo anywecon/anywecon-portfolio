@@ -2,7 +2,7 @@
 
 ## Τι είναι
 Production portfolio site του brand "Any WeCon" (solo freelance dev, Πάτρα).
-Live: https://anywecon.dev (+ www → apex redirect). Repo: github.com/anywecon/anywecon-portfolio (private, org Any WeCon· Vercel GitHub App εγκατεστημένη στο org μόνο για αυτό το repo).
+Live: https://anywecon.dev (+ www → apex redirect). Repo: github.com/anywecon/anywecon-portfolio (PUBLIC, org Any WeCon — Vercel Hobby δεν κάνει deploy από private org repos· Vercel GitHub App στο org μόνο για αυτό το repo). Ποτέ secrets στο repo.
 Local path: F:\Projects\Portofolio\anywecon-portfolio
 
 ## Stack
