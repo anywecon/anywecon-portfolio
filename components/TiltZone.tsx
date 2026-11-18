@@ -3,7 +3,6 @@
 import { useRef, type CSSProperties, type ReactNode } from "react";
 
 const MAX_TILT = 9; // degrees
-const GLOW_RADIUS = 90; // px from edge where the lime border appears
 
 /**
  * Wraps an element so that, on a fine pointer:
