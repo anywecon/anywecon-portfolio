@@ -1,11 +1,16 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
-export const runtime = "edge";
 export const alt = "Any WeCon — Freelance Developer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OG() {
+// next/og 16 ships Geist as its fallback font; Next 15 shipped Noto Sans.
+// Embed Noto Sans (OFL, assets/fonts) so the card keeps its original look.
+const notoSans = await readFile(join(process.cwd(), "assets/fonts/noto-sans-latin-400-normal.woff"));
+
+export default async function OG() {
   return new ImageResponse(
     (
       <div
@@ -34,7 +39,7 @@ export default function OG() {
         />
 
         {/* top row: wordmark */}
-        <div style={{ display: "flex", alignItems: "center", zIndex: 1 }}>
+        <div style={{ display: "flex", alignItems: "center" }}>
           <span
             style={{
               fontSize: 30,
@@ -61,7 +66,7 @@ export default function OG() {
         </div>
 
         {/* headline */}
-        <div style={{ display: "flex", flexDirection: "column", zIndex: 1 }}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
           <div
             style={{
               fontSize: 76,
@@ -89,7 +94,7 @@ export default function OG() {
         </div>
 
         {/* bottom row: stack chips */}
-        <div style={{ display: "flex", gap: 14, zIndex: 1 }}>
+        <div style={{ display: "flex", gap: 14 }}>
           {["Next.js", "React Native", "Expo", "Supabase", "Tauri"].map((s) => (
             <div
               key={s}
@@ -109,6 +114,9 @@ export default function OG() {
         </div>
       </div>
     ),
-    { ...size }
+    {
+      ...size,
+      fonts: [{ name: "Noto Sans", data: notoSans, style: "normal", weight: 400 }],
+    },
   );
 }
