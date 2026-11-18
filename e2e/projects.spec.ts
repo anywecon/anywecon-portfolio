@@ -7,8 +7,8 @@ for (const project of projects) {
     test("renders name, specs and stack", async ({ page }) => {
       await page.goto("/");
       const article = projectArticle(page, project.name);
-      await article.scrollIntoViewIfNeeded();
       await expect(article).toHaveCount(1);
+      await article.scrollIntoViewIfNeeded();
       await expect(article.getByRole("heading", { level: 3 })).toHaveText(project.name);
       await expect(article).toContainText(project.tagline.en);
 
@@ -17,7 +17,10 @@ for (const project of projects) {
         await expect(cell).toContainText(spec.value);
       }
       for (const item of project.stack) {
-        await expect(article.locator("span", { hasText: item }).first()).toBeVisible();
+        // stack badges: span.rounded.border.bg-surface in the card's copy column
+        await expect(
+          article.locator("span.rounded.border.bg-surface").filter({ hasText: item }).first(),
+        ).toBeVisible();
       }
     });
 
@@ -32,6 +35,7 @@ for (const project of projects) {
     test("lightbox shows every screenshot and closes with Escape", async ({ page }) => {
       await page.goto("/");
       const article = projectArticle(page, project.name);
+      await expect(article).toHaveCount(1);
       await article.scrollIntoViewIfNeeded();
 
       const firstThumb = article.getByRole("button", { name: `Open ${project.name} screenshot 1` });
@@ -56,6 +60,7 @@ for (const project of projects) {
       test(`uses aspect-ratio ${aspect}`, async ({ page }) => {
         await page.goto("/");
         const article = projectArticle(page, project.name);
+        await expect(article).toHaveCount(1);
         await article.scrollIntoViewIfNeeded();
         const thumb = article
           .getByRole("button", { name: `Open ${project.name} screenshot 1` })

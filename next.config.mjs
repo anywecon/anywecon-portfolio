@@ -9,7 +9,7 @@ const nextConfig = {
   output: "standalone",
   images: { unoptimized: true },
   // Pin the tracing root to this repo: stray lockfiles in parent folders
-  // (e.g. F:\Projects\package-lock.json) otherwise confuse root inference.
+  // otherwise confuse root inference.
   outputFileTracingRoot: dirname(fileURLToPath(import.meta.url)),
 };
 export default nextConfig;

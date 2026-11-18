@@ -14,7 +14,9 @@ test("content is visible and usable with reduced motion", async ({ page }) => {
   await expect(page.locator("#top h1")).toContainText(t.hero.lineRotate[0]);
   await expect(page.locator(".custom-cursor")).toBeHidden();
 
-  // Every animated block must end fully opaque once it has been scrolled to.
+  // Every Motion-animated block (inline opacity) must end fully opaque once
+  // scrolled to. Elements that merely list opacity in will-change (Hero word,
+  // carousel tiles) match too, which is intended: they must be opaque as well.
   const animated = page.locator("main [style*='opacity']");
   const count = await animated.count();
   for (let i = 0; i < count; i++) {

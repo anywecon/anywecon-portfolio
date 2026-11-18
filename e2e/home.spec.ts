@@ -10,7 +10,11 @@ test.describe("home", () => {
     const sameOrigin = (url: string): boolean => new URL(url).origin === origin;
 
     page.on("console", (msg) => {
-      if (msg.type() === "error") consoleErrors.push(msg.text());
+      if (msg.type() !== "error") return;
+      // Scripts injected by the host (e.g. the Vercel preview toolbar) are not ours.
+      const source = msg.location().url;
+      if (source && !sameOrigin(source)) return;
+      consoleErrors.push(msg.text());
     });
     page.on("pageerror", (err) => pageErrors.push(err.message));
     page.on("requestfailed", (req) => {

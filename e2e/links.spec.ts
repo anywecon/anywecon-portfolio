@@ -1,9 +1,10 @@
 import { expect, test, type APIRequestContext, type Page } from "@playwright/test";
+import { CONTACT_EMAIL } from "../lib/contact";
 import { profiles, ossRepos, repoUrl } from "../lib/oss";
 import { projects } from "../lib/projects";
 import { isMobileProject } from "./helpers";
 
-const CONTACT_MAILTO = "mailto:anywecon@gmail.com";
+const CONTACT_MAILTO = `mailto:${CONTACT_EMAIL}`;
 
 async function collectHrefs(page: Page): Promise<string[]> {
   await page.goto("/");

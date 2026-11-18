@@ -1,4 +1,5 @@
 import { defineConfig, devices } from "@playwright/test";
+import { VERCEL_STATE_PATH } from "./e2e/global-setup";
 
 const PORT = 3100;
 const externalBaseURL = process.env.PLAYWRIGHT_BASE_URL;
@@ -17,9 +18,12 @@ export default defineConfig({
   reporter: process.env.CI ? [["list"], ["html", { open: "never" }]] : "list",
   timeout: 60_000,
   expect: { timeout: 10_000 },
+  globalSetup: "./e2e/global-setup.ts",
   use: {
     baseURL,
     trace: "retain-on-failure",
+    // Auth cookie for a protected Vercel deployment (see e2e/global-setup.ts).
+    storageState: process.env.PLAYWRIGHT_VERCEL_SHARE_URL ? VERCEL_STATE_PATH : undefined,
   },
   projects: [
     { name: "desktop-chromium", use: { ...devices["Desktop Chrome"] } },

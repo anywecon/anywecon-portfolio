@@ -14,7 +14,7 @@ Production portfolio site of the **Any WeCon** brand (solo freelance developer, 
 - Fonts: self-hosted via `@fontsource` CSS imports in `app/layout.tsx` (Space Grotesk display, Inter body, JetBrains Mono mono). Do not use `next/font/google`.
 - ESLint 9 flat config (`eslint.config.mjs`, `eslint-config-next` core-web-vitals + typescript)
 - Playwright E2E (`e2e/`)
-- Node >= 20.9 (local: 22)
+- Node >= 20.9 (Next 16 minimum; Vercel project runs 24.x, local 22)
 
 ## Structure
 
@@ -32,7 +32,8 @@ Production portfolio site of the **Any WeCon** brand (solo freelance developer, 
 | `components/ShotCarousel.tsx` | 3-up sliding carousel + lightbox (Escape / arrows) |
 | `components/TiltZone.tsx` | 3D tilt + edge glow, emits `awc:calm-*` events |
 | `components/OpenSource.tsx` | Open-source repo cards + `ProfileLinks` |
-| `components/Contact.tsx` | Contact section (`EMAIL` constant) |
+| `components/Contact.tsx` | Contact section |
+| `lib/contact.ts` | `CONTACT_EMAIL` (public contact address) |
 | `lib/projects.ts` | All project content |
 | `lib/oss.ts` | OSS allowlist + code-host profiles |
 | `lib/repoStats.ts` | Server-only GitHub/GitLab stats fetch (5s timeout, never throws) |
@@ -44,12 +45,12 @@ Production portfolio site of the **Any WeCon** brand (solo freelance developer, 
 ## Editing content
 
 - **Projects** — `lib/projects.ts`. Each entry: `slug`, copy (EL/EN), `stack`, `specs`, `shots` (count of `public/shots/<slug>/01.png`..`NN.png`).
-  - `shotAspect` — set (e.g. `"9 / 16"`) when screenshots are not the default 9:19.5 phone ratio.
+  - `shotAspect` — set (e.g. `"9 / 16"`) when screenshots are not phone ratio. Without it, thumbnails use `9 / 19` and the lightbox `9 / 19.5`.
   - `storeUrl` — Google Play listing link. `liveUrl` — live demo link.
 - **Open source** — `lib/oss.ts`. Only repos in `ossRepos` are shown (curated allowlist, never auto-listed). `profiles` holds the GitHub/GitLab profile links.
 - **UI strings** — `lib/i18n.ts` (both `el` and `en` must have the same keys).
-- **Contact email** — `EMAIL` constant in `components/Contact.tsx`.
-- E2E tests read `lib/projects.ts` and `lib/i18n.ts`, so content edits are covered automatically.
+- **Contact email** — `CONTACT_EMAIL` in `lib/contact.ts`.
+- E2E tests read `lib/projects.ts`, `lib/oss.ts`, `lib/i18n.ts` and `lib/contact.ts`, so content edits are covered automatically.
 
 ## Commands
 
@@ -58,17 +59,20 @@ npm run dev              # http://localhost:3000
 npm run typecheck        # tsc --noEmit
 npm run lint             # eslint .
 npm run build            # next build (Turbopack, output: standalone)
-npm run start            # next start
+npm run start            # next start (warns with output: standalone; prefer start:standalone)
 npm run start:standalone # copy assets + node .next/standalone/server.js (PORT env, default 3000)
 npm run test:e2e         # Playwright: builds, serves standalone on :3100, runs e2e/
+                         # (locally reuses a server already on :3100 and skips the build: stop it first)
 PLAYWRIGHT_BASE_URL=https://<preview> npm run test:e2e   # run against a deployed URL
+# Protected Vercel preview: also set PLAYWRIGHT_VERCEL_SHARE_URL to a share link
+# (Vercel MCP get_access_to_vercel_url); e2e/global-setup.ts stores the auth cookie.
 npx playwright test --grep-invert @external              # skip external-link checks
 ```
 
 ## Deploy
 
 - **Now:** Vercel (Hobby), Git-connected. Push to `main` = production deploy. PRs get Preview deployments.
-- **Later:** VPS (Docker + Caddy) using `output: "standalone"` (`node .next/standalone/server.js`). Keep the app free of Vercel-only runtime deps/config.
+- **Later:** VPS (Docker + Caddy) using `output: "standalone"` (`node .next/standalone/server.js`). `server.js` alone does not serve `public/` or `.next/static/`: the image must copy them to `.next/standalone/public` and `.next/standalone/.next/static` (as `scripts/start-standalone.mjs` does). Set `HOSTNAME=0.0.0.0` and `PORT` in the container. Keep the app free of Vercel-only runtime deps/config.
 
 ## Rules
 
@@ -83,7 +87,8 @@ npx playwright test --grep-invert @external              # skip external-link ch
 - Stop the dev server and delete `.next` before `npm run build`, otherwise builds fail with EPERM file locks.
 - Non-interactive push (GCM pops a dialog and fails silently):
   `git -c credential.helper= -c "credential.helper=!gh auth git-credential" push`
-- A stray lockfile exists in `F:\Projects`; `outputFileTracingRoot` in `next.config.mjs` pins the root to this repo.
+- A stray lockfile exists in a parent folder; `outputFileTracingRoot` in `next.config.mjs` pins the root to this repo.
+- Playwright runs with 1 worker locally: a third-party firewall driver on the dev box stalls the server's socket closes under parallel load (`--workers=N` to override).
 
 ## Next.js docs for agents
 
