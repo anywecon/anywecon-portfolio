@@ -29,13 +29,5 @@
     "postcss": "^8.5.18",
     "tailwindcss": "^3.4.13",
     "typescript": "^5.9.3"
-  },
-  "overrides": {
-    "next": {
-      "postcss": "$postcss"
-    },
-    "brace-expansion@^1.1.0": "^1.1.21",
-    "@types/react": "19.3.0",
-    "@types/react-dom": "19.3.0"
   }
 }
