@@ -1,6 +1,6 @@
 **Current:** Next.js 16 upgrade + Playwright E2E (branch `chore/next-16`) — PR open, awaiting owner review
-**Next step:** Owner reviews the PR and the Vercel preview, decides on the picomatch advisory, then merges
-**Last session:** 2026-11-18 — Next 16.4.6, ESLint 10 flat config, standalone output, Playwright suite; typecheck/lint/build/E2E green
+**Next step:** Owner reviews PR #1 and the Vercel preview, then merges
+**Last session:** 2026-11-18 — Next 16.4.6, ESLint 10 flat config, standalone output, Playwright suite; typecheck/lint/build/E2E/osv/gitleaks green
 
 ## 2026-11-18 — Next.js 16 upgrade
 
@@ -14,5 +14,5 @@ Done:
 - Playwright E2E: desktop + mobile Chromium, 46 tests
 
 Open risks:
-- picomatch ReDoS advisory (GHSA-fc5q-39xc-vjpf), dev dependencies only, no fixed release yet
+- picomatch advisory GHSA-fc5q-39xc-vjpf was withdrawn on 2026-11-18; osv-scanner reports no issues, no ignore file added
 - Local Windows: Playwright runs with 1 worker (firewall driver stalls parallel runs)
