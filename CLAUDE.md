@@ -12,7 +12,7 @@ Production portfolio site of the **Any WeCon** brand (solo freelance developer, 
 - Tailwind CSS 3.4 via PostCSS (custom theme: ink `#0A0A0B`, surface `#121214`, line `#26262A`, fog `#EDEDED`, steel `#6B7280`, lime `#C8FF00`)
 - Motion (`motion/react`) — the only animation/UI library
 - Fonts: self-hosted via `@fontsource` CSS imports in `app/layout.tsx` (Space Grotesk display, Inter body, JetBrains Mono mono). Do not use `next/font/google`.
-- ESLint 9 flat config (`eslint.config.mjs`, `eslint-config-next` core-web-vitals + typescript)
+- ESLint 10 flat config (`eslint.config.mjs`, `eslint-config-next` core-web-vitals + typescript)
 - Playwright E2E (`e2e/`)
 - Node >= 20.9 (Next 16 minimum; Vercel project runs 24.x, local 22)
 
